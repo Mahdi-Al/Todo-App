@@ -1,5 +1,7 @@
 import React from "react";
 import Header from "./Header";
+import Main from "./Main";
+import Cartt from "./Cartt";
 import {
   IconButton,
   Typography,
@@ -44,16 +46,16 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex  h-screen w-full ">
         {/* Sidebar for larger screens */}
         <div
-          className="hidden lg:flex lg:flex-col lg:w-64 lg:bg-gray-100 lg:h-screen"
+          className="hidden lg:flex h-screen   lg:bg-gray-100 lg:w-1/4"
           style={{ background: " #e8eaf6" }}
         >
           <Card
             color="transparent"
             shadow={false}
-            className="h-[calc(100vh-2rem)] w-full p-4"
+            className="h-full w-full p-4"
           >
             <div className="mb-2 flex items-center gap-4 p-3">
               <Typography variant="h5" color="blue-gray">
@@ -62,7 +64,7 @@ export default function Navbar() {
             </div>
             <div className="p-2">
               <Button style={{ background: "#0288d1" }} fullWidth>
-                block level button
+                Add new task
               </Button>
             </div>
             <List>
@@ -127,22 +129,7 @@ export default function Navbar() {
                   />
                 }
               >
-                <ListItem className="p-0" selected={open === 2}>
-                  <AccordionHeader
-                    onClick={() => handleOpen(2)}
-                    className="border-b-0 p-3"
-                  >
-                    <ListItemPrefix>
-                      <ShoppingBagIcon className="h-5 w-5" />
-                    </ListItemPrefix>
-                    <Typography
-                      color="blue-gray"
-                      className="mr-auto font-normal"
-                    >
-                      E-Commerce
-                    </Typography>
-                  </AccordionHeader>
-                </ListItem>
+                <ListItem className="p-0" selected={open === 2}></ListItem>
                 <AccordionBody className="py-1">
                   <List className="p-0">
                     <ListItem>
@@ -197,20 +184,23 @@ export default function Navbar() {
             </List>
           </Card>
         </div>
-        <Header />
+        <div className="flex flex-col flex-1 ">
+          {" "}
+          {/* Main content area */}
+          <Header />
+          <Main /> {/* Main content */}
+        </div>
       </div>
     </>
   );
 }
 
-{
-  /* <IconButton variant="text" size="lg" onClick={openDrawer}>
-{isDrawerOpen ? (
-  <XMarkIcon className="h-8 w-8 stroke-2" />
-) : (
-  <Bars3Icon className="h-8 w-8 stroke-2" />
-)}
-</IconButton>
-<Drawer open={isDrawerOpen} onClose={closeDrawer}>
-</Drawer> */
-}
+//  <IconButton variant="text" size="lg" onClick={openDrawer}>
+// {isDrawerOpen ? (
+//   <XMarkIcon className="h-8 w-8 stroke-2" />
+// ) : (
+//   <Bars3Icon className="h-8 w-8 stroke-2" />
+// )}
+// </IconButton>
+// <Drawer open={isDrawerOpen} onClose={closeDrawer}>
+// </Drawer>

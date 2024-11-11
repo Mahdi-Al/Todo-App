@@ -1,6 +1,7 @@
 import { Input, Button } from "@material-tailwind/react";
-import { useState } from "react";
+
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import Cartt from "./Cartt";
 const months = [
   "January",
   "February",
@@ -15,9 +16,8 @@ const months = [
   "November",
   "December",
 ];
-
+const currentDate = new Date();
 export default function Header() {
-  const [currentDate, setCurrentDate] = useState(new Date());
   return (
     <>
       <div className=" flex ml-6 justify-end align-bottom w-screen mt-7">
