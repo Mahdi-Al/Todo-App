@@ -1,15 +1,12 @@
 import React from "react";
 import Header from "./Header";
 import Main from "./Main";
-import Cartt from "./Cartt";
 import {
   IconButton,
   Typography,
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
   Accordion,
   AccordionHeader,
   AccordionBody,
@@ -19,14 +16,11 @@ import {
 } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
   Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import {
-  ChevronRightIcon,
   ChevronDownIcon,
   Bars3Icon,
   XMarkIcon,
@@ -34,7 +28,6 @@ import {
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(0);
-
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const handleOpen = (value) => {
@@ -46,11 +39,18 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex  h-screen w-full ">
+      <div className={`flex h-screen w-full`}>
+        <IconButton variant="text" size="lg" onClick={openDrawer}>
+          {isDrawerOpen ? (
+            <XMarkIcon className="h-8 w-8 stroke-2" />
+          ) : (
+            <Bars3Icon className="h-8 w-8 stroke-2" />
+          )}
+        </IconButton>
         {/* Sidebar for larger screens */}
         <div
-          className="hidden lg:flex h-screen   lg:bg-gray-100 lg:w-1/4"
-          style={{ background: " #e8eaf6" }}
+          className="hidden lg:flex h-screen lg:bg-gray-100 lg:w-1/4"
+          style={{ background: "#e8eaf6" }}
         >
           <Card
             color="transparent"
@@ -82,7 +82,7 @@ export default function Navbar() {
                 <ListItem className="p-0" selected={open === 1}>
                   <AccordionHeader
                     onClick={() => handleOpen(1)}
-                    className="border-b-0 p-3"
+                    className="border-b-0 p-3 "
                   >
                     <ListItemPrefix>
                       <PresentationChartBarIcon className="h-5 w-5" />
@@ -91,99 +91,39 @@ export default function Navbar() {
                       color="blue-gray"
                       className="mr-auto font-normal"
                     >
-                      Dashboard
+                      Darectories
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
                 <AccordionBody className="py-1">
                   <List className="p-0">
-                    <ListItem>
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Analytics
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Reporting
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Projects
-                    </ListItem>
+                    <ListItem>Secendry</ListItem>
+                    <ListItem>Main</ListItem>
+                    <button>+New</button>
                   </List>
                 </AccordionBody>
               </Accordion>
-              <Accordion
-                open={open === 2}
-                icon={
-                  <ChevronDownIcon
-                    strokeWidth={2.5}
-                    className={`mx-auto h-4 w-4 transition-transform ${
-                      open === 2 ? "rotate-180" : ""
-                    }`}
-                  />
-                }
-              >
-                <ListItem className="p-0" selected={open === 2}></ListItem>
-                <AccordionBody className="py-1">
-                  <List className="p-0">
-                    <ListItem>
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Orders
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Products
-                    </ListItem>
-                  </List>
-                </AccordionBody>
-              </Accordion>
-              <hr className="my-2 border-blue-gray-50" />
+              {/* Add other accordions and list items as needed */}
               <ListItem>
-                <ListItemPrefix>
-                  <InboxIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Inbox
-                <ListItemSuffix>
-                  <Chip
-                    value="14"
-                    size="sm"
-                    variant="ghost"
-                    color="blue-gray"
-                    className="rounded-full"
-                  />
-                </ListItemSuffix>
+                <ListItemPrefix></ListItemPrefix>
+                All tasks
               </ListItem>
               <ListItem>
-                <ListItemPrefix>
-                  <UserCircleIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Profile
+                <ListItemPrefix></ListItemPrefix>
+                Important tasks
               </ListItem>
               <ListItem>
-                <ListItemPrefix>
-                  <Cog6ToothIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Settings
+                <ListItemPrefix></ListItemPrefix>
+                Completed tasks
               </ListItem>
               <ListItem>
-                <ListItemPrefix>
-                  <PowerIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Log Out
+                <ListItemPrefix></ListItemPrefix>
+                Uncompleted tasks
               </ListItem>
             </List>
           </Card>
         </div>
+
         <div className="flex flex-col flex-1 ">
           {" "}
           {/* Main content area */}
@@ -194,13 +134,3 @@ export default function Navbar() {
     </>
   );
 }
-
-//  <IconButton variant="text" size="lg" onClick={openDrawer}>
-// {isDrawerOpen ? (
-//   <XMarkIcon className="h-8 w-8 stroke-2" />
-// ) : (
-//   <Bars3Icon className="h-8 w-8 stroke-2" />
-// )}
-// </IconButton>
-// <Drawer open={isDrawerOpen} onClose={closeDrawer}>
-// </Drawer>

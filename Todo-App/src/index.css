@@ -11,3 +11,10 @@ body {
 #root {
   overflow-x: hidden !important;
 }
+
+.btn-in-cart {
+}
+hr {
+  border: dotted gainsboro 2px;
+  height: 1px;
+}
