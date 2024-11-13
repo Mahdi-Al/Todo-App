@@ -18,3 +18,7 @@ hr {
   border: dotted gainsboro 2px;
   height: 1px;
 }
+#icon {
+  display: inline-block;
+  width: 25px;
+}

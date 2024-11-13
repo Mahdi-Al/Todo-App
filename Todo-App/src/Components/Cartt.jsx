@@ -6,6 +6,8 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
+import dateIcon from "../assets/date.svg";
+import kebabIcon from "../assets/kebab-menu.svg";
 export default function Cartt({ title, content, date }) {
   return (
     <Card className="mt-6 ml-2 w-auto">
@@ -20,7 +22,8 @@ export default function Cartt({ title, content, date }) {
           {title}
         </Typography>
         <Typography>
-          {content} {`\n`}
+          {content} <br />
+          <img id="icon" src={dateIcon} alt="" />
           {date}
         </Typography>
       </CardBody>
@@ -35,6 +38,7 @@ export default function Cartt({ title, content, date }) {
           </button>
           <TrashIcon strokeWidth={2.5} className={` h-6 w-10 mt-4`}></TrashIcon>
           <StarIcon strokeWidth={2.5} className={` h-6 w-10 mt-4`}></StarIcon>
+          <img className=" mt-4 " id="icon" src={kebabIcon} alt="" />
         </article>
       </CardFooter>
     </Card>

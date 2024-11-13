@@ -1,7 +1,8 @@
 import { Input, Button } from "@material-tailwind/react";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import Cartt from "./Cartt";
+import SquareIcon from "../assets/square.svg";
+import menu from "../assets/menu.svg";
 const months = [
   "January",
   "February",
@@ -20,15 +21,15 @@ const currentDate = new Date();
 export default function Header() {
   return (
     <>
-      <div className=" flex ml-6 justify-end align-bottom w-screen mt-7">
-        <div className="flex-none ">
+      <div className=" flex ml-6 justify-end align-bottom w-screen mt-7 lg-max:flex-col lg-max:items-center">
+        <div className="">
           <Input
-            icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            icon={<MagnifyingGlassIcon className="h-5 w-auto" />}
             label="Search"
           />
         </div>
         <div className="flex-auto w-64 text-center ">
-          <p className="">
+          <p className="  ">
             {currentDate.getFullYear()} {months[currentDate.getMonth()]}{" "}
             {currentDate.getDate()}
           </p>
@@ -37,6 +38,20 @@ export default function Header() {
           <Button style={{ background: "#0288d1" }}>Add new task</Button>
         </div>
       </div>
+      <aside className="flex justify-evenly mt-8">
+        <img id="icon" src={SquareIcon} alt="" />
+        <img id="icon" className=" mr-10 " src={menu} alt="" />
+        <h2>Main (tasks 3 tasks )</h2>
+
+        <select className=" mr-10 " style={{ background: "#e8eaf6" }}>
+          <option>Sort by</option>
+          <option>Order added</option>
+          <option>Earlier first</option>
+          <option>Laster first</option>
+          <option>Completed first</option>
+          <option>Uncompleted first</option>
+        </select>
+      </aside>
     </>
   );
 }

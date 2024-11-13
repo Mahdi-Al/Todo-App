@@ -49,7 +49,7 @@ export default function Navbar() {
         </IconButton>
         {/* Sidebar for larger screens */}
         <div
-          className="hidden lg:flex h-screen lg:bg-gray-100 lg:w-1/4"
+          className="hidden lg:flex h-screen lg:bg-gray-100 "
           style={{ background: "#e8eaf6" }}
         >
           <Card
