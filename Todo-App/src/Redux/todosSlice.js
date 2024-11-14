@@ -3,7 +3,7 @@ import data from "../../data.json";
 
 const todosSlice = createSlice({
   name: "todos",
-  initialState: [],
+  initialState: [...data],
   reducers: {
     addTodo: (state, action) => {
       state.push(action.payload);
