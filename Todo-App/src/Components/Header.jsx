@@ -1,5 +1,5 @@
 import { Input, Button } from "@material-tailwind/react";
-
+import ModalForm from "./ModalForm";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import SquareIcon from "../assets/square.svg";
 import menu from "../assets/menu.svg";
@@ -35,7 +35,7 @@ export default function Header() {
           </p>
         </div>
         <div className="flex-auto justify-end w-36">
-          <Button style={{ background: "#0288d1" }}>Add new task</Button>
+          <ModalForm />
         </div>
       </div>
       <aside className="flex justify-evenly mt-8">

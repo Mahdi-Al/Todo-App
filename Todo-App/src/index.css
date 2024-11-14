@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-}
+/* :root {
+} */
 body {
   background: #e0f2f1;
   overflow-x: hidden !important;
@@ -12,13 +12,14 @@ body {
   overflow-x: hidden !important;
 }
 
-.btn-in-cart {
-}
+/* .btn-in-cart {
+} */
 hr {
   border: dotted gainsboro 2px;
   height: 1px;
 }
 #icon {
   display: inline-block;
+  cursor: pointer;
   width: 25px;
 }

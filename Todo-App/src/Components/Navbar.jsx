@@ -25,7 +25,8 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-
+import Alert from "./Alert";
+import ModalForm from "./ModalForm";
 export default function Navbar() {
   const [open, setOpen] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -63,9 +64,7 @@ export default function Navbar() {
               </Typography>
             </div>
             <div className="p-2">
-              <Button style={{ background: "#0288d1" }} fullWidth>
-                Add new task
-              </Button>
+              <ModalForm fullWidth />
             </div>
             <List>
               <Accordion
