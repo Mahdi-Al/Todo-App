@@ -1,4 +1,6 @@
-import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../Redux/todosSlice";
 import {
   Input,
   Option,
@@ -15,10 +17,30 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function ModalForm() {
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [date, setDate] = useState("");
+  const dispatch = useDispatch();
   const handleOpen = () => setOpen(!open);
-
+  const handleAddTask = () => {
+    // Validate input before dispatching
+    if (title && content && date) {
+      const newTodo = { id: Date.now(), title, content, date };
+      dispatch(addTodo(newTodo));
+      setTitle("");
+      setContent("");
+      setDate("");
+      handleOpen();
+      console.log(title);
+      console.log(content);
+      console.log(date);
+      console.log(newTodo);
+    } else {
+      // Handle error (e.g., show a notification or alert)
+      console.error("All fields are required!");
+    }
+  };
   return (
     <>
       <Button
@@ -58,6 +80,9 @@ export default function ModalForm() {
               placeholder="eg. study for the test"
               name="name"
               className="placeholder:opacity-100 focus:!border-t-gray-900"
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
               containerProps={{
                 className: "!min-w-full",
               }}
@@ -80,6 +105,9 @@ export default function ModalForm() {
                 size="lg"
                 placeholder="eg. study for the test"
                 name="name"
+                onChange={(e) => {
+                  setDate(e.target.value);
+                }}
                 className="placeholder:opacity-100 focus:!border-t-gray-900"
                 containerProps={{
                   className: "!min-w-full",
@@ -117,8 +145,11 @@ export default function ModalForm() {
           >
             Description (Optional)
           </Typography>
-          <Textarea
+          <Input
             rows={7}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
             placeholder="eg. This is a white shoes with a comfortable sole."
             className="!w-full !border-[1.5px] !border-blue-gray-200/90 !border-t-blue-gray-200/90 bg-white text-gray-600 ring-4 ring-transparent focus:!border-primary focus:!border-t-blue-gray-900 group-hover:!border-primary"
             labelProps={{
@@ -131,7 +162,7 @@ export default function ModalForm() {
             fullWidth
             style={{ background: "#0288d1" }}
             className="ml-auto"
-            onClick={handleOpen}
+            onClick={handleAddTask}
           >
             Add a task
           </Button>

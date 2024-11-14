@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import {
@@ -28,8 +28,8 @@ import {
 import Alert from "./Alert";
 import ModalForm from "./ModalForm";
 export default function Navbar() {
-  const [open, setOpen] = React.useState(0);
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [open, setOpen] = useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
