@@ -15,14 +15,22 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-
-export default function ModalForm() {
+import { useEffect } from "react";
+export default function ModalForm({ todo, onClose, hidden }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState("");
   const dispatch = useDispatch();
   const handleOpen = () => setOpen(!open);
+  useEffect(() => {
+    if (todo) {
+      setTitle(todo.title);
+      setContent(todo.content);
+      setDate(todo.date);
+      setOpen(true); // Open the modal when a todo is selected
+    }
+  }, [todo]);
   const handleAddTask = () => {
     // Validate input before dispatching
     if (title && content && date) {
@@ -31,6 +39,7 @@ export default function ModalForm() {
       setTitle("");
       setContent("");
       setDate("");
+      onClose();
       handleOpen();
       console.log(title);
       console.log(content);
@@ -161,7 +170,7 @@ export default function ModalForm() {
           <Button
             fullWidth
             style={{ background: "#0288d1" }}
-            className="ml-auto"
+            className={`ml-auto ${hidden}`}
             onClick={handleAddTask}
           >
             Add a task
