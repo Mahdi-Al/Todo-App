@@ -13,11 +13,13 @@ import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
 import dateIcon from "../assets/date.svg";
 import kebabIcon from "../assets/kebab-menu.svg";
 import { useState } from "react";
-
+import Alert from "./Alert";
 export default function Cartt({ todo }) {
   const [selectedTodo, setSelectedTodo] = useState(null);
   const [isToggled, setIsToggled] = useState(false);
   const [isToggled2, setIsToggled2] = useState(false);
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(!open);
   const dispatch = useDispatch();
 
   const handleToggle = () => {
@@ -30,6 +32,7 @@ export default function Cartt({ todo }) {
 
   const handleRemove = () => {
     dispatch(removeTodo(todo.id));
+    console.log("hh");
   };
 
   const handleEditClick = (todo) => {
@@ -66,33 +69,42 @@ export default function Cartt({ todo }) {
           >
             {isToggled ? "Completed" : "Uncompleted"}
           </button>
-          <TrashIcon
-            onClick={handleRemove}
-            strokeWidth={2.5}
-            className={`h-6 w-10 mt-4`}
-          />
+
+          <Alert handleRemove={handleRemove}>
+            <TrashIcon
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent the event from bubbling up
+                handleRemove();
+              }}
+              strokeWidth={2.5}
+              className={`h-6 w-10 mt-4`}
+            />
+          </Alert>
           <StarIcon
             onClick={handleToggleStar}
             strokeWidth={2.5}
             className={`h-6 w-10 mt-4 ${isToggled2 ? "text-amber-300" : ""}`}
           />
-          <img
-            className="mt-4"
-            id="icon"
-            src={kebabIcon}
-            alt=""
-            onClick={() => handleEditClick(todo)} // Open the modal on click
-          />
+
+          <ModalForm>
+            <img
+              className="mt-4"
+              id="icon"
+              src={kebabIcon}
+              alt=""
+              onClick={() => handleEditClick(todo)} // Open the modal on click
+            />
+          </ModalForm>
         </article>
       </CardFooter>
 
       {/* Render the ModalForm if a todo is selected */}
-      {selectedTodo && (
+      {/* {selectedTodo && (
         <ModalForm
           todo={selectedTodo}
           onClose={handleCloseModal} // Close the modal
         />
-      )}
+      )} */}
     </Card>
   );
 }

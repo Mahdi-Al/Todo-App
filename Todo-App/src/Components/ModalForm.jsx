@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../Redux/todosSlice";
 import {
@@ -16,7 +16,7 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
-export default function ModalForm({ todo, onClose, hidden }) {
+export default function ModalForm({ todo, onClose, hidden, children }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -52,13 +52,17 @@ export default function ModalForm({ todo, onClose, hidden }) {
   };
   return (
     <>
-      <Button
+      {/* <Button
         style={{ background: "#0288d1" }}
         onClick={handleOpen}
         variant="gradient"
       >
         Add new task
-      </Button>
+      </Button> */}
+      {React.Children.map(children, (child) => {
+        return React.cloneElement(child, { onClick: handleOpen });
+      })}
+
       <Dialog size="sm" open={open} handler={handleOpen} className="p-4">
         <DialogHeader className="relative m-0 block">
           <Typography variant="h4" color="blue-gray">
@@ -110,6 +114,7 @@ export default function ModalForm({ todo, onClose, hidden }) {
                 Date
               </Typography>
               <Input
+                type="date"
                 color="gray"
                 size="lg"
                 placeholder="eg. study for the test"
@@ -142,8 +147,8 @@ export default function ModalForm({ todo, onClose, hidden }) {
                 className: "hidden",
               }}
             >
-              <Option>Mian</Option>
-              <Option>Secendry</Option>
+              <Option>Main</Option>
+              <Option>Scenery</Option>
             </Select>
           </div>
 
@@ -171,7 +176,10 @@ export default function ModalForm({ todo, onClose, hidden }) {
             fullWidth
             style={{ background: "#0288d1" }}
             className={`ml-auto ${hidden}`}
-            onClick={handleAddTask}
+            onClick={() => {
+              handleAddTask();
+              handleOpen();
+            }}
           >
             Add a task
           </Button>

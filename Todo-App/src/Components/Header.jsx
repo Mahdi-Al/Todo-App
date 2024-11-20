@@ -2,6 +2,7 @@ import { Input, Button } from "@material-tailwind/react";
 import ModalForm from "./ModalForm";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import SquareIcon from "../assets/square.svg";
+import { addTodo } from "../Redux/todosSlice";
 import menu from "../assets/menu.svg";
 const months = [
   "January",
@@ -19,6 +20,10 @@ const months = [
 ];
 const currentDate = new Date();
 export default function Header() {
+  const handleRemove = () => {
+    dispatch(addTodo(todo.id));
+    console.log("hh");
+  };
   return (
     <>
       <div className=" flex ml-6 justify-end align-bottom w-screen mt-7 lg-max:flex-col lg-max:items-center">
@@ -35,7 +40,18 @@ export default function Header() {
           </p>
         </div>
         <div className="flex-auto justify-end w-36">
-          <ModalForm />
+          <ModalForm>
+            <Button
+              style={{ background: "#0288d1" }}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent the event from bubbling up
+                handleRemove();
+              }}
+              variant="gradient"
+            >
+              Add new task
+            </Button>
+          </ModalForm>
         </div>
       </div>
       <aside className="flex justify-evenly mt-8">

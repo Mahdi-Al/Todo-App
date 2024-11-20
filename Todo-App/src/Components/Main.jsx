@@ -9,15 +9,6 @@ export default function Main() {
   }
   return (
     <main className="flex flex-wrap">
-      {/* {data.map((task) => (
-        <Cartt
-          key={task.id}
-          title={task.title}
-          content={task.Content}
-          date={task.date}
-        />
-      ))} */}
-
       {todos.map((todo) => (
         <Cartt key={todo.id} todo={todo} /> // Pass the todo object as a prop
       ))}

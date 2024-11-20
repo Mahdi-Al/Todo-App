@@ -64,7 +64,16 @@ export default function Navbar() {
               </Typography>
             </div>
             <div className="p-2">
-              <ModalForm fullWidth />
+              <ModalForm>
+                <Button
+                  style={{ background: "#0288d1" }}
+                  onClick={handleOpen}
+                  variant="gradient"
+                  fullWidth
+                >
+                  Add new task
+                </Button>
+              </ModalForm>
             </div>
             <List>
               <Accordion
