@@ -17,6 +17,7 @@ import Alert from "./Alert";
 export default function Cartt({ todo }) {
   const [selectedTodo, setSelectedTodo] = useState(null);
   const [isToggled, setIsToggled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isToggled2, setIsToggled2] = useState(false);
   // const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(!open);
@@ -32,17 +33,21 @@ export default function Cartt({ todo }) {
 
   const handleRemove = () => {
     dispatch(removeTodo(todo.id));
-    console.log("hh");
   };
 
   const handleEditClick = (todo) => {
-    setSelectedTodo(todo); // Set the selected todo
+    setSelectedTodo(todo);
+    setIsModalOpen(true); // Open the modal for editing
   };
 
   const handleCloseModal = () => {
-    setSelectedTodo(null); // Close the modal
+    setSelectedTodo(null);
+    setIsModalOpen(false); // Close the modal
   };
-
+  const handleSubmitEdit = (updatedTodo) => {
+    dispatch(editTodo(updatedTodo)); // Dispatch the edit action
+    handleCloseModal(); // Close the modal after editing
+  };
   return (
     <Card className="mt-6 ml-2 w-auto hover:shadow-blue-gray-400">
       <button className="bg-deep-orange-200 w-12 mb-3 rounded-sm" type="button">
@@ -86,13 +91,18 @@ export default function Cartt({ todo }) {
             className={`h-6 w-10 mt-4 ${isToggled2 ? "text-amber-300" : ""}`}
           />
 
-          <ModalForm>
+          <ModalForm
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            currentTodo={todo}
+            onSubmit={handleSubmitEdit}
+          >
             <img
               className="mt-4"
               id="icon"
               src={kebabIcon}
               alt=""
-              onClick={() => handleEditClick(todo)} // Open the modal on click
+              onClick={handleEditClick}
             />
           </ModalForm>
         </article>

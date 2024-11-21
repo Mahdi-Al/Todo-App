@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../Redux/todosSlice";
+import { addTodo, editTodo } from "../Redux/todosSlice";
+import PropTypes from "prop-types";
 import {
   Input,
   Option,
@@ -16,7 +17,14 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
-export default function ModalForm({ todo, onClose, hidden, children }) {
+export default function ModalForm({
+  todo,
+
+  hidden,
+  children,
+  currentTodo,
+  onSubmit,
+}) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -39,8 +47,8 @@ export default function ModalForm({ todo, onClose, hidden, children }) {
       setTitle("");
       setContent("");
       setDate("");
-      onClose();
-      handleOpen();
+
+      // handleOpen();
       console.log(title);
       console.log(content);
       console.log(date);
@@ -49,6 +57,21 @@ export default function ModalForm({ todo, onClose, hidden, children }) {
       // Handle error (e.g., show a notification or alert)
       console.error("All fields are required!");
     }
+  };
+  const handleSubmit = () => {
+    if (!currentTodo) {
+      console.error("No currentTodo provided");
+      return; // Prevent further execution
+    }
+
+    const updatedTodo = {
+      id: currentTodo.id, // This will now be safe to access
+      title,
+      content,
+      date,
+    };
+    onSubmit(updatedTodo); // Call the onSubmit prop
+    // Close the modal
   };
   return (
     <>
@@ -177,14 +200,25 @@ export default function ModalForm({ todo, onClose, hidden, children }) {
             style={{ background: "#0288d1" }}
             className={`ml-auto ${hidden}`}
             onClick={() => {
-              handleAddTask();
-              handleOpen();
+              if (currentTodo) {
+                handleOpen();
+                handleSubmit();
+              } else {
+                handleAddTask();
+                handleOpen();
+              }
             }}
           >
-            Add a task
+            {currentTodo ? "Update Task" : "Add Task"}
           </Button>
         </DialogFooter>
       </Dialog>
     </>
   );
 }
+// ModalForm.propTypes = {
+//   isOpen: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+//   currentTodo: PropTypes.object,
+//   onSubmit: PropTypes.func.isRequired,
+// };
