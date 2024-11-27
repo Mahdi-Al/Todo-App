@@ -3,7 +3,9 @@ import ModalForm from "./ModalForm";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import SquareIcon from "../assets/square.svg";
 import { addTodo } from "../Redux/todosSlice";
+
 import menu from "../assets/menu.svg";
+import { useState } from "react";
 const months = [
   "January",
   "February",
@@ -18,11 +20,13 @@ const months = [
   "November",
   "December",
 ];
+
 const currentDate = new Date();
 export default function Header() {
-  const handleRemove = () => {
-    dispatch(addTodo(todo.id));
-    console.log("hh");
+  const [isGridLayout, setIsGridLayout] = useState(true); // Initial layout is grid
+
+  const toggleLayout = () => {
+    setIsGridLayout((prev) => !prev); // Toggle the boolean state
   };
   return (
     <>
@@ -45,7 +49,6 @@ export default function Header() {
               style={{ background: "#0288d1" }}
               onClick={(e) => {
                 e.stopPropagation(); // Prevent the event from bubbling up
-                handleRemove();
               }}
               variant="gradient"
             >
@@ -55,8 +58,14 @@ export default function Header() {
         </div>
       </div>
       <aside className="flex justify-evenly mt-8">
-        <img id="icon" src={SquareIcon} alt="" />
-        <img id="icon" className=" mr-10 " src={menu} alt="" />
+        <img id="icon" src={SquareIcon} onClick={toggleLayout} alt="" />
+        <img
+          id="icon"
+          className=" mr-10 "
+          onClick={toggleLayout}
+          src={menu}
+          alt=""
+        />
         <h2>Main (tasks 3 tasks )</h2>
 
         <select className=" mr-10 " style={{ background: "#e8eaf6" }}>
