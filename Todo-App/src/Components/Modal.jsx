@@ -1,13 +1,13 @@
 import {
   Button,
   Dialog,
-  DialogHeader,
   DialogBody,
   DialogFooter,
+  DialogHeader,
 } from "@material-tailwind/react";
 import { useState } from "react";
 
-function Modal({ children, title, Btn, BtnContent, fn }) {
+function Modal({ children, fn }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -42,5 +42,11 @@ function Modal({ children, title, Btn, BtnContent, fn }) {
     </>
   );
 }
+
+function Btn({ children }) {
+  return <Button>{children}</Button>;
+}
+
+Modal.Btn = Btn;
 
 export default Modal;
