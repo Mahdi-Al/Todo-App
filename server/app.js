@@ -4,12 +4,14 @@ const connectDB = require("./db/connectDB");
 const app = express();
 const port = process.env.PORT || 3002;
 const taskRouter = require("./routes/tasks.routes");
+const directoryRouter = require("./routes/directories.routes");
 // middleware
 const logger = require("./middlewares/logger");
 // * define middlewares
 app.use(express.json(), express.urlencoded({ extended: true }));
 // ? define routes
 app.use("/tasks", taskRouter);
+app.use("/directories", directoryRouter);
 // app.use("/directories");
 async function callFunc() {
   await connectDB();

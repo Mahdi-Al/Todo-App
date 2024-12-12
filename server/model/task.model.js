@@ -28,7 +28,7 @@ const taskSchema = new mongoose.Schema({
   },
   deadline: {
     type: Date,
-    required: true,
+    required: false,
   },
   dirId: {
     type: mongoose.Schema.Types.ObjectId, // Reference to Directory
