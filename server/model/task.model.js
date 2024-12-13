@@ -35,6 +35,11 @@ const taskSchema = new mongoose.Schema({
     ref: "Directory", // Name of the model to reference
     required: true, // Ensure a task must belong to a directory
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId, // Reference to Directory
+    ref: "User", // Name of the model to reference
+    required: true, // Ensure a task must belong to a directory
+  },
 });
 // Create the Task model
 const Task = mongoose.model("Task", taskSchema);
